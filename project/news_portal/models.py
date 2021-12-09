@@ -38,6 +38,15 @@ class Post(models.Model):
     def preview(self):
         return self.text[:125] + '...'
 
+    def __str__(self):
+        return f'{self.headline} preview: {self.text[:20]}'
+
+    def get_category_names(self):
+        result = []
+        for category in self.category.all():
+            result.append(category.name)
+        return ', '.join(result)
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

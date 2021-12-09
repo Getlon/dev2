@@ -19,7 +19,7 @@ cinema = Category.objects.create(name='cinema')
 #4
 news_dima = Post.objects.create(author=dima_author, form=Post.news, headline="новость_dima", text='Дима новость jfbrgfuvhdfnfbdjf')
 article_dima = Post.objects.create(author=dima_author, form=Post.article, headline="статья_dima", text='Дима статья kfouiryetr6537r336')
-article_vasya = Post.objects.create(author=vasya_author, form=Post.article, headline="новость_vasya", text='Вася статья 3973843648346383473')
+article_vasya = Post.objects.create(author=vasya_author, form=Post.article, headline="статья_vasya", text='Вася статья 3973843648346383473')
 
 #5
 PostCategory.objects.create(post=news_dima, category=sport)
