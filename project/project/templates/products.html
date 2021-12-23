@@ -1,0 +1,54 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+    <h1>Все товары</h1>
+    <h3>{{ time_now|date:'M d Y' }}</h3> <!-- Здесь мы применяем фильтр date. Он очень похож на метод strftime у даты. С его помощью мы можем выводить дату в нужном нам формате -->
+    <hr>
+    {% if products %} <!-- Если есть товары, то выводим таблицу с ними -->
+        <table>
+            <tr>
+                <td>
+                    Название
+                </td>
+                <td>
+                    Описание
+                </td>
+                <td>
+                    Категория
+                </td>
+                <td>
+                    Цена
+                </td>
+                <td>
+                    Количество
+                </td>
+            </tr>
+        {% for product in products %}
+            <tr>
+                <td>
+                    {{ product.name }}
+                </td>
+                <td>
+                    {{ product.description|truncatechars:15 }} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 15. Все остальные символы превратятся в многоточие. -->
+                </td>
+                <td>
+                    {{ product.category.name }}
+                </td>
+                <td>
+                    {{ product.price }}
+                </td>
+                <td>
+                    {{ product.quantity }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Товаров нет!</h2>
+    {% endif %}
+{% endblock content %}
+

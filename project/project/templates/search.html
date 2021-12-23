@@ -16,6 +16,7 @@ Posts search
     <hr>
     <h3>Найдено: {{ filter.qs|length }}</h3>
         <hr>
+        {% if person_page_object %}
         <table>
             <thead>
                 <th>
@@ -28,21 +29,27 @@ Posts search
                     <h3>Автор</h3>
                 </th>
             </thead>
-            {% for post in person_page_object %}
+            {% for item in person_page_object %}
             <tr>
                 <td>
-                    <a href="{% url 'item' item.id %}">{{ item.headline|title|censor }}</a>
+                    <a href="{% url 'post_detail' item.id %}">{{ item.headline|title|censor }}</a>
+                    <a href="{% url 'post_edit' item.id %}">Редактировать</a>
+                    <a href="{% url 'post_delete' item.id %}">Удалить</a>
                 </td>
                 <td>
-                    {{ post.publication_date_and_time|date:'d-m-y H:m' }}
+                    {{ item.publication_date_and_time|date:'d-m-y H:m' }}
                 </td>
                 <td>
-                    {{ post.author.user.username }}
+                    {{ item.author.user.username }}
                 </td>
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
         <hr>
+
+
+<a href="{% url 'post_add' %}">Добавить пост.</a>
 
 {% if is_paginated %}
 
@@ -64,11 +71,5 @@ Posts search
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
 {% endif %}
-
-<form method="post">
-    {% csrf_token %}
-    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
-    <input type="submit" value="Добавить товар">
-</form>
 
 {% endblock content %}

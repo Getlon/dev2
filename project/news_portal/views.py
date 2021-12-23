@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post, Category
 from django.views.generic import ListView
 from .filters import NewsFilter
@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from .forms import PostForm
 
 
-class PostsList(ListView):
+class PostsListView(ListView):
     model = Post
     template_name = 'news.html'
     context_object_name = 'news'
@@ -14,15 +14,39 @@ class PostsList(ListView):
     queryset = queryset.order_by('-id')
 
 
-class PostDetail(DetailView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'item.html'
-    # context_object_name = 'item'
-    # queryset = Post.objects.filter(form=Post.news)
+    context_object_name = 'item'
     queryset = Post.objects.all()
 
 
-class PostsSearchList(ListView):
+class PostAddView(CreateView):
+    model = Post
+    template_name = 'post_add_edit.html'
+    context_object_name = 'item'
+    queryset = Post.objects.all()
+    form_class = PostForm
+    success_url = '/news/search/'
+
+
+class PostEditView(UpdateView):
+    model = Post
+    template_name = 'post_add_edit.html'
+    context_object_name = 'item'
+    queryset = Post.objects.all()
+    form_class = PostForm
+    success_url = '/news/search/'
+
+
+class PostDeleteView(DeleteView):
+    template_name = 'post_delete.html'
+    context_object_name = 'item'
+    queryset = Post.objects.all()
+    success_url = '/news/search/'
+
+
+class PostsSearchListView(ListView):
     model = Post
     template_name = 'search.html'
     context_object_name = 'posts'

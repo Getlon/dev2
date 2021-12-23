@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import PostDetail, PostsList, PostsSearchList
+from .views import PostDetailView, PostsListView, PostsSearchListView, PostAddView, PostEditView, PostDeleteView
 
-app_name = 'news_portal'
+
 urlpatterns = [
-    path('', PostsList.as_view()),
-    path('search/', PostsSearchList.as_view()),
-    path('<int:pk>/', PostDetail.as_view(), name='item'),  # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
+    path('', PostsListView.as_view()),
+    path('search/', PostsSearchListView.as_view()),
+    path('<int:pk>/', PostDetailView.as_view(), name='post_detail'),  # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
+    path('add/', PostAddView.as_view(), name='post_add'),
+    path('edit/<int:pk>/', PostEditView.as_view(), name='post_edit'),
+    path('delete/<int:pk>/', PostDeleteView.as_view(), name='post_delete')
 ]
