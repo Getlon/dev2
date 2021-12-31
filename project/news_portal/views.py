@@ -4,6 +4,10 @@ from django.views.generic import ListView
 from .filters import NewsFilter
 from django.core.paginator import Paginator
 from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class PostsListView(ListView):
@@ -21,7 +25,8 @@ class PostDetailView(DetailView):
     queryset = Post.objects.all()
 
 
-class PostAddView(CreateView):
+class PostAddView(PermissionRequiredMixin, CreateView):
+    permission_required = ('news_portal.add_post',)
     model = Post
     template_name = 'post_add_edit.html'
     context_object_name = 'item'
@@ -30,7 +35,8 @@ class PostAddView(CreateView):
     success_url = '/news/search/'
 
 
-class PostEditView(UpdateView):
+class PostEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = ('news_portal.change_post',)
     model = Post
     template_name = 'post_add_edit.html'
     context_object_name = 'item'
@@ -39,13 +45,15 @@ class PostEditView(UpdateView):
     success_url = '/news/search/'
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = ('news_portal.delete_post',)
     template_name = 'post_delete.html'
     context_object_name = 'item'
     queryset = Post.objects.all()
     success_url = '/news/search/'
 
 
+# @method_decorator(login_required, name='dispatch')
 class PostsSearchListView(ListView):
     model = Post
     template_name = 'search.html'
