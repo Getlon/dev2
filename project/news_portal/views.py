@@ -1,5 +1,6 @@
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from .models import Post, Category
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, View
+from .models import Post, Category, Subscribers
+from django.shortcuts import render, reverse, redirect
 from django.views.generic import ListView
 from .filters import NewsFilter
 from django.core.paginator import Paginator
@@ -8,6 +9,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.http import HttpResponse
+from django import template
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from .models import Post, Subscribers, User
 
 
 class PostsListView(ListView):
@@ -88,3 +94,19 @@ class PostsSearchListView(ListView):
             form.save()
 
         return super().get(request, *args, **kwargs)
+
+
+# def subscribe_me(request):
+    # user = request.user
+    # post_category = Category.objects.filter(id=id)[0]
+    # if Subscribers.objects.filter(user_id=user.id, category_id=post_category.id).exists():
+    #     response = HttpResponse()
+    #     response.write(f"<p>Вы уже подписаны на новости в категории {post_category.name}</p>")
+    #     response.write('<a class="nav-link" href="/news/search/">Вернуться</a>')
+    #     return response
+    # else:
+    #     Subscribers.objects.create(user_id=user.id, category_id=post_category.id)
+    #     response = HttpResponse()
+    #     response.write(f"<p>Вы подписались на новости в категории {post_category.name}</p>")
+    #     response.write('<a class="nav-link" href="/news/search/">Вернуться</a>')
+    #     return response

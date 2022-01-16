@@ -1,8 +1,2 @@
-def double(list1):
-    for index, value in enumerate(list1):
-        list1[index] = value * 2
-    return list1
-
-
-print(double([1, 2, 3, 4]))
-
+a = 'http://127.0.0.1:8000/news/5/a'
+print(a.replace('http://127.0.0.1:8000/news/5/', ''))

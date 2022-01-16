@@ -11,8 +11,22 @@ class Author(models.Model):
         self.save()
 
 
+class ForScheduler(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.CharField(max_length=50, unique=True)
+    link = models.TextField()
+
+    def __str__(self):
+        return f'{self.id}, {self.email}, {self.link}, {self.user}'
+
+
 class Category(models.Model):
-    name = models.CharField(unique=True, max_length=128)
+    name = models.CharField(max_length=128, unique=True)
+
+
+class Subscribers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
 class Post(models.Model):

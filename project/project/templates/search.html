@@ -1,6 +1,7 @@
 {% extends 'flatpages/default.html' %}
 
 {% load custom_filters %}
+{% load custom_simple_tag %}
 
 {% block title %}
 Posts search
@@ -8,7 +9,17 @@ Posts search
 
 {% block content %}
     <h1>Поиск новостей и статей</h1>
+
+
     <hr>
+    <p1>Подписаться/отписаться на категории -> </p1>
+    <button> <a href="{% url 'subscribe_me1' %}">sport</a> </button>
+    <button> <a href="{% url 'subscribe_me2' %}">music</a> </button>
+    <button> <a href="{% url 'subscribe_me3' %}">science</a> </button>
+    <button> <a href="{% url 'subscribe_me4' %}">cinema</a> </button>
+    <hr>
+
+
     <form method="get">
         {{ filter.form }}
         <input type="submit" value="Найти">
