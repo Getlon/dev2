@@ -1,12 +1,16 @@
-<html>
-    <head>
-        <title> Simple SignUp/SignIn app</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Simple SignUp/SignIn app</a></h1>
-        </div>
-        {% block content %}
-        {% endblock %}
-    </body>
-</html>
+{% extends 'flatpages/default.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Нужно правильно выбрасывать мусор и держать планету в чистоте!</h2>
+<img src="{% static 'images/people.jpg' %}" width="900" height="500">
+<hr>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/daJdRt34s2g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<style>
+body{
+    background-color: #a0e69e
+   }
+</style>
+{% endblock content %}

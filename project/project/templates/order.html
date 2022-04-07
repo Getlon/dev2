@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% load static %}
+
+{% block content %}
+<h3>Добавить запрос:</h3>
+<form method="POST">
+    {% csrf_token %} 
+    {{ form }}
+    <input type="submit" value="Добавить запрос">
+</form>
+<style>
+   body {
+    background-image: url({% static 'images/kamaz.jpg' %});
+    background-repeat: no-repeat;
+   }
+</style>
+<br><br><br><br><br>
+<h1>Номер телефона:</h1>
+<h2>+7 987 654 32 10</h2>
+<background-image: src="{% static 'images/kamaz.jpg' %}" alt='Изображение не найдено.' width="800" height="550">
+    <h3></h3>
+{% endblock content %}

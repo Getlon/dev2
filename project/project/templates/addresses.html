@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <style>
+    body{
+        background-color: #a0e69e
+       }
+    </style>
+    <h3>Адреса пунктов раздельного сбора <br> мусора в городе Якутске:</h3>
+    <hr>
+    {% if addresses %}
+        <table align='center'>
+        {% for item in addresses %}
+            <tr>
+                <td>
+                    <li>{{ item.address }}</li>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>На данный момент пунктов приёма разденого мусора нет.</h2>
+    {% endif %}
+    <hr>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14967.00691863728!2d129.70563645759935!3d62.03626935729622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5bf64a16f32f96ff%3A0x368fe30707933360!2z0J3QvtCy0YvQtSDRjdC60L7Qu9C-0LPQuNGH0LXRgdC60LjQtSDRgtC10YXQvdC-0LvQvtCz0LjQuA!5e0!3m2!1sru!2sru!4v1649294535358!5m2!1sru!2sru" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<hr>
+{% endblock content %}
